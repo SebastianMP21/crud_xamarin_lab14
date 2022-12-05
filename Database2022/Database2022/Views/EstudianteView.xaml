@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Database2022.Views.EstudianteView">
+    <ContentPage.Content>
+        <StackLayout x:Name="viewStackLayout">
+            <Label Text="Estudiantes" Padding="100" HorizontalOptions="CenterAndExpand" FontSize="Title" FontAttributes="Bold,Italic" />
+            <Entry Placeholder="Nombre" Text="{Binding Nombre}" CursorPosition="5" />
+            <Entry Placeholder="Apellido" Text="{Binding Apellido}"/>
+            <Entry Placeholder="Grado" Text="{Binding Grado}"/>
+            <Entry Placeholder="Sección" Text="{Binding Seccion}"/>
+            <Button Text="Guardar" Command="{Binding InsertCommand}" BackgroundColor="Green"/>
+            
+            <ListView x:Name="lvEstudiante" ItemsSource="{Binding Estudiantes}" BackgroundColor="{Binding Color}" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="4">
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" WidthRequest="200">
+                                    <Label Text="{Binding Nombre}"></Label>
+                                    <Label Text="{Binding Apellidos}"></Label>
+                                    <Label Text="{Binding Grado}"></Label>
+                                    <Label Text="{Binding Seccion}"></Label>
+                                </StackLayout>
+                                <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+                                    <Button Text="Editar" Command="{Binding BindingContext.SelectOneCommand, Source={x:Reference viewStackLayout}}" 
+                                            CommandParameter="{Binding EstudianteId}" 
+                                        BackgroundColor="GreenYellow"/>
+
+                                    <Button Text="Eliminar" Command="{Binding BindingContext.DeleteCommand, Source={x:Reference viewStackLayout}}" 
+                                            CommandParameter="{Binding EstudianteId}"
+                                        BackgroundColor="Red"/>
+                                </StackLayout>
+                                
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
